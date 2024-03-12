@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-
+// ignore: must_be_immutable
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({
     super.key,
@@ -24,10 +24,10 @@ class CategoryScreen extends StatelessWidget {
       width: double.infinity,
       height: 235,
       child: GridView.builder(
-        padding: EdgeInsets.only(top: 24),
-        physics: NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.only(top: 24),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: categories.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
           mainAxisSpacing: 16,
           crossAxisSpacing: 10,

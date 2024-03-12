@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'category.dart';
 import 'promotion_slider.dart';
-
 
 class BodyScreen extends StatefulWidget {
   const BodyScreen({super.key});
@@ -25,12 +23,11 @@ class _BodyScreenState extends State<BodyScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         // Label Special Offers
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Special Offers',
               // style: GoogleFonts.outfit(
               //   fontWeight: FontWeight.w600,
@@ -45,7 +42,7 @@ class _BodyScreenState extends State<BodyScreen> {
             ),
             TextButton(
               onPressed: () {},
-              child: Text(
+              child: const Text(
                 'See All',
                 // style: GoogleFonts.outfit(
                 //   color: Colors.black,
@@ -66,12 +63,15 @@ class _BodyScreenState extends State<BodyScreen> {
         const SizedBox(height: 12),
         BannerSlider(images: image),
         CategoryScreen(),
+        const SizedBox(height: 12),
+        BannerSlider(images: image),
+        CategoryScreen(),
 
         // Label Most Popular
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Most Popular',
               // style: GoogleFonts.outfit(
               //   fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class _BodyScreenState extends State<BodyScreen> {
             ),
             TextButton(
               onPressed: () {},
-              child: Text(
+              child: const Text(
                 'See All',
                 // style: GoogleFonts.outfit(
                 //   color: Colors.black,

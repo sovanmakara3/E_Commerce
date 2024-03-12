@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/app_bar.dart';
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class WalletScreen extends StatelessWidget {
+  const WalletScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: AppBars(),
+      backgroundColor: Colors.pink,
     );
   }
 }

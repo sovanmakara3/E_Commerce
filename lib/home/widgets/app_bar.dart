@@ -1,6 +1,5 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-
 import '../../constants/ColorConstants.dart';
 import 'body_screen.dart';
 
@@ -41,7 +40,7 @@ class AppBars extends StatelessWidget {
                     fontWeight: FontWeight.w300,
                   ),
                 ),
-                Text(
+                const Text(
                   'Sung Jin Woo',
                   // style: GoogleFonts.outfit(fontWeight: FontWeight.w600),
                   style: TextStyle(
@@ -112,7 +111,7 @@ class AppBars extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) => BodyScreen(),
+              (context, index) => const BodyScreen(),
               childCount: 1,
             ),
           ),

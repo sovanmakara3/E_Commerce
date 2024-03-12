@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../home_screen.dart';
-
+import '../homepage_contain.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -16,7 +15,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void _onIntroEnd(context) {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const HomeScreen()),
+      MaterialPageRoute(builder: (_) => HomePage()),
     );
   }
 
@@ -47,10 +46,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 //     fontWeight: FontWeight.bold,
                 //     color: Colors.black),
                 style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black
-                ),
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
               const SizedBox(height: 20),
               Text(
@@ -63,11 +61,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 //   color: Colors.grey.shade700,
                 // ),
                 style: TextStyle(
-                  height: 1.8,
-                  letterSpacing: 0.6,
-                  wordSpacing: 5.0,
-                  color: Colors.grey.shade700
-                ),
+                    height: 1.8,
+                    letterSpacing: 0.6,
+                    wordSpacing: 5.0,
+                    color: Colors.grey.shade700),
               ),
             ],
           ),
@@ -148,11 +145,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 //   color: Colors.grey.shade700,
                 // ),
                 style: TextStyle(
-                  height: 1.8,
-                  letterSpacing: 0.6,
-                  wordSpacing: 5.0,
-                  color: Colors.grey.shade700
-                ),
+                    height: 1.8,
+                    letterSpacing: 0.6,
+                    wordSpacing: 5.0,
+                    color: Colors.grey.shade700),
               ),
             ],
           ),
@@ -187,8 +183,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       onDone: () => _onIntroEnd(context),
       nextStyle: ButtonStyle(
           foregroundColor: MaterialStateProperty.all(
-            Colors.black,
-          )),
+        Colors.black,
+      )),
       dotsDecorator: const DotsDecorator(
         size: Size.square(10),
         activeColor: Colors.black,
