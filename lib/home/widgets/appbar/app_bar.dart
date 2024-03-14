@@ -1,7 +1,7 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:e_commerce/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
-import '../../constants/ColorConstants.dart';
-import 'body_screen.dart';
+import 'package:iconsax/iconsax.dart';
+import '../body_screen/body_screen.dart';
 
 class AppBars extends StatelessWidget {
   const AppBars({super.key});
@@ -13,16 +13,22 @@ class AppBars extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: ColorConstants.backgroundColor50,
-            surfaceTintColor: Colors.transparent,
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
             floating: true,
             snap: true,
-            foregroundColor: Colors.black,
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: Image.asset(
-                'assets/icons/jinwoo.jpg',
-                fit: BoxFit.cover,
+            // pinned: true,
+            leading: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.asset(
+                  'assets/icons/jinwoo.jpg',
+                ),
               ),
             ),
             title: Column(
@@ -50,18 +56,43 @@ class AppBars extends StatelessWidget {
               ],
             ),
             actions: [
-              SizedBox(
-                height: 26,
-                child: Image.asset(
-                  'assets/icons/notification.png',
-                ),
+              Stack(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const NotificationScreen()));
+                    },
+                    icon: const Icon(Iconsax.notification),
+                  ),
+                  Positioned(
+                    right: 0,
+                    child: Container(
+                      width: 18,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '2',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 20),
-              SizedBox(
-                height: 26,
-                child: Image.asset(
-                  'assets/icons/heart.png',
-                ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Iconsax.heart),
               ),
             ],
             expandedHeight: 150,
@@ -92,16 +123,13 @@ class AppBars extends StatelessWidget {
                       prefixIcon: const Padding(
                         padding: EdgeInsets.all(14),
                         child: Icon(
-                          FluentIcons.search_20_filled,
+                          Iconsax.search_normal_1,
                           color: Colors.grey,
                         ),
                       ),
                       suffixIcon: const Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Icon(
-                          FluentIcons.options_20_regular,
-                          color: Colors.black,
-                        ),
+                        child: Icon(Iconsax.setting_4),
                       ),
                     ),
                   ),

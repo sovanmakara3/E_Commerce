@@ -1,6 +1,8 @@
+import 'package:e_commerce/home/widgets/products/product_card_vertical.dart';
 import 'package:flutter/material.dart';
-import 'category.dart';
-import 'promotion_slider.dart';
+import '../category_homescreen/category.dart';
+import '../layouts/grid_layout.dart';
+import '../promotion_slide/promotion_slider.dart';
 
 class BodyScreen extends StatefulWidget {
   const BodyScreen({super.key});
@@ -63,9 +65,6 @@ class _BodyScreenState extends State<BodyScreen> {
         const SizedBox(height: 12),
         BannerSlider(images: image),
         CategoryScreen(),
-        const SizedBox(height: 12),
-        BannerSlider(images: image),
-        CategoryScreen(),
 
         // Label Most Popular
         Row(
@@ -101,6 +100,12 @@ class _BodyScreenState extends State<BodyScreen> {
               ),
             ),
           ],
+        ),
+
+        // Product Card Vertical
+        MyGridLayout(
+          itemCount: 8,
+          itemBuilder: (_, index) => const ProductCardVertical(),
         ),
       ],
     );

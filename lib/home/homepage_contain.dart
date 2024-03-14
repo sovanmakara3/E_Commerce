@@ -4,7 +4,7 @@ import 'package:e_commerce/orders/order_screen.dart';
 import 'package:e_commerce/profile/profile_screen.dart';
 import 'package:e_commerce/wallet/wallet_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 // ignore: must_be_immutable
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: Colors.white,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -45,42 +45,43 @@ class _HomePageState extends State<HomePage> {
         items: [
           /// Home
           SalomonBottomBarItem(
-            icon: Icon(MdiIcons.homeOutline),
+            icon: const Icon(Iconsax.home_2),
             title: const Text("Home"),
             selectedColor: Colors.black,
-            activeIcon: Icon(MdiIcons.home),
+            activeIcon: const Icon(Iconsax.home_25),
           ),
 
           /// Cart
           SalomonBottomBarItem(
-            icon: Icon(MdiIcons.shoppingOutline),
+            icon: const Icon(Iconsax.shopping_bag),
             title: const Text("Cart"),
             selectedColor: Colors.black,
-            activeIcon: Icon(MdiIcons.shopping),
+            activeIcon: const Icon(Iconsax.shopping_bag5),
           ),
 
           /// Orders
           SalomonBottomBarItem(
-            icon: Icon(MdiIcons.cartOutline),
+            icon: const Icon(Iconsax.shopping_cart),
             title: const Text("Orders"),
             selectedColor: Colors.black,
-            activeIcon: Icon(MdiIcons.cart),
+            activeIcon: const Icon(Iconsax.shopping_cart5),
           ),
 
           /// Wallet
           SalomonBottomBarItem(
-            icon: Icon(MdiIcons.walletBifoldOutline),
+            icon: const Icon(Iconsax.empty_wallet),
             title: const Text("Wallet"),
             selectedColor: Colors.black,
-            activeIcon: Icon(MdiIcons.walletBifold),
+            activeIcon: const Icon(Iconsax.empty_wallet5),
           ),
 
           /// Profile
           SalomonBottomBarItem(
-              icon: Icon(MdiIcons.accountOutline),
-              title: const Text("Profile"),
-              selectedColor: Colors.black,
-              activeIcon: Icon(MdiIcons.account)),
+            icon: const Icon(Iconsax.profile_circle),
+            title: const Text("Profile"),
+            selectedColor: Colors.black,
+            activeIcon: const Icon(Iconsax.profile_circle5),
+          ),
         ],
       ),
     );

@@ -2,9 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/home_controller.dart';
-import 'indecator.dart';
-
+import '../../../controllers/home_controller.dart';
+import '../indecator.dart';
 
 class BannerSlider extends StatelessWidget {
   BannerSlider({
