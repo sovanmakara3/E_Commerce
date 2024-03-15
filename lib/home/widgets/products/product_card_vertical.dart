@@ -62,8 +62,8 @@ class ProductCardVertical extends StatelessWidget {
                     top: 10,
                     right: 10,
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: 30,
+                      height: 30,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
                         color: Colors.black,
@@ -73,6 +73,7 @@ class ProductCardVertical extends StatelessWidget {
                         icon: const Icon(
                           Iconsax.heart,
                           color: Colors.white,
+                          size: Sized.iconSm,
                         ),
                       ),
                     ),

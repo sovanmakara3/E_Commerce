@@ -1,5 +1,8 @@
 import 'package:e_commerce/home/widgets/products/product_card_vertical.dart';
+import 'package:e_commerce/most_popular/mostpopular_screen.dart';
+import 'package:e_commerce/special_offer/special_offer_screen.dart';
 import 'package:flutter/material.dart';
+import '../../../constants/sizes.dart';
 import '../category_homescreen/category.dart';
 import '../layouts/grid_layout.dart';
 import '../promotion_slide/promotion_slider.dart';
@@ -13,10 +16,10 @@ class BodyScreen extends StatefulWidget {
 
 class _BodyScreenState extends State<BodyScreen> {
   List<dynamic> image = [
+    'assets/banners/redShoes.jpg',
     'assets/banners/black friday.jpg',
     'assets/banners/discount.jpg',
     'assets/banners/happygirl.jpg',
-    'assets/banners/redShoes.jpg',
     'assets/banners/shoes.jpg'
   ];
 
@@ -31,11 +34,6 @@ class _BodyScreenState extends State<BodyScreen> {
           children: [
             const Text(
               'Special Offers',
-              // style: GoogleFonts.outfit(
-              //   fontWeight: FontWeight.w600,
-              //   fontSize: 22,
-              //   letterSpacing: 0,
-              // ),
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 20,
@@ -43,14 +41,14 @@ class _BodyScreenState extends State<BodyScreen> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SpecialOfferScreen()));
+              },
               child: const Text(
                 'See All',
-                // style: GoogleFonts.outfit(
-                //   color: Colors.black,
-                //   fontSize: 16,
-                //   fontWeight: FontWeight.w600,
-                // ),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -62,7 +60,7 @@ class _BodyScreenState extends State<BodyScreen> {
         ),
 
         // Slide banner
-        const SizedBox(height: 12),
+        const SizedBox(height: Sized.spaceBtwItems),
         BannerSlider(images: image),
         CategoryScreen(),
 
@@ -72,11 +70,6 @@ class _BodyScreenState extends State<BodyScreen> {
           children: [
             const Text(
               'Most Popular',
-              // style: GoogleFonts.outfit(
-              //   fontWeight: FontWeight.w600,
-              //   fontSize: 22,
-              //   letterSpacing: 0,
-              // ),
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 20,
@@ -84,14 +77,14 @@ class _BodyScreenState extends State<BodyScreen> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MostPopularScreen()));
+              },
               child: const Text(
                 'See All',
-                // style: GoogleFonts.outfit(
-                //   color: Colors.black,
-                //   fontSize: 16,
-                //   fontWeight: FontWeight.w600,
-                // ),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -103,6 +96,7 @@ class _BodyScreenState extends State<BodyScreen> {
         ),
 
         // Product Card Vertical
+        const SizedBox(height: Sized.spaceBtwItems),
         MyGridLayout(
           itemCount: 8,
           itemBuilder: (_, index) => const ProductCardVertical(),

@@ -1,6 +1,10 @@
+import 'package:e_commerce/favorite/favorite_screen.dart';
 import 'package:e_commerce/notification/notification_screen.dart';
+import 'package:e_commerce/search_screen/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:page_transition/page_transition.dart';
+import '../../../constants/sizes.dart';
 import '../body_screen/body_screen.dart';
 
 class AppBars extends StatelessWidget {
@@ -91,7 +95,12 @@ class AppBars extends StatelessWidget {
                 ],
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FavoriteScreen()));
+                },
                 icon: const Icon(Iconsax.heart),
               ),
             ],
@@ -99,38 +108,77 @@ class AppBars extends StatelessWidget {
             flexibleSpace: ListView(
               children: [
                 const SizedBox(height: 80),
-                SizedBox(
-                  height: 55,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      labelText: 'Search',
-                      // labelStyle: GoogleFonts.outfit(
-                      //   fontSize: 14,
-                      //   fontWeight: FontWeight.w300,
-                      //   color: Colors.grey.shade500,
-                      // ),
-                      labelStyle: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.grey.shade500),
-                      fillColor: Colors.grey.shade200,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
+                // SizedBox(
+                //   height: 55,
+                //   child: TextField(
+                //     // onTap: () {
+                //     //   Navigator.push(
+                //     //     context,
+                //     //     PageTransition(
+                //     //       type: PageTransitionType.fade,
+                //     //       duration: Duration(milliseconds: 300),
+                //     //       child: SearchScreen(),
+                //     //     ),
+                //     //   );
+                //     // },
+                //     decoration: InputDecoration(
+                //       floatingLabelBehavior: FloatingLabelBehavior.never,
+                //       labelText: 'Search',
+                //       labelStyle: TextStyle(
+                //           fontSize: 14,
+                //           fontWeight: FontWeight.w300,
+                //           color: Colors.grey.shade500),
+                //       fillColor: Colors.grey.shade200,
+                //       filled: true,
+                //       border: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(10),
+                //         borderSide: BorderSide.none,
+                //       ),
+                //       prefixIcon: const Padding(
+                //         padding: EdgeInsets.all(14),
+                //         child: Icon(
+                //           Iconsax.search_normal_1,
+                //           color: Colors.grey,
+                //         ),
+                //       ),
+                //       suffixIcon: const Padding(
+                //         padding: EdgeInsets.all(16.0),
+                //         child: Icon(Iconsax.setting_4),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.fade,
+                        duration: const Duration(milliseconds: 300),
+                        child: const SearchScreen(),
                       ),
-                      prefixIcon: const Padding(
-                        padding: EdgeInsets.all(14),
-                        child: Icon(
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Row(
+                      children: [
+                        Icon(
                           Iconsax.search_normal_1,
                           color: Colors.grey,
                         ),
-                      ),
-                      suffixIcon: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Icon(Iconsax.setting_4),
-                      ),
+                        SizedBox(width: Sized.md),
+                        Text(
+                          'Search for products',
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                        SizedBox(width: 150),
+                        Icon(Iconsax.setting_4)
+                      ],
                     ),
                   ),
                 ),
