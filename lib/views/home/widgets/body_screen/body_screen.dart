@@ -1,10 +1,10 @@
-import 'package:e_commerce/home/widgets/products/product_card_vertical.dart';
-import 'package:e_commerce/most_popular/mostpopular_screen.dart';
-import 'package:e_commerce/special_offer/special_offer_screen.dart';
 import 'package:flutter/material.dart';
-import '../../../constants/sizes.dart';
+import '../../../../constants/sizes.dart';
+import '../../../most_popular/mostpopular_screen.dart';
+import '../../../special_offer/special_offer_screen.dart';
 import '../category_homescreen/category.dart';
 import '../layouts/grid_layout.dart';
+import '../products/product_card_vertical.dart';
 import '../promotion_slide/promotion_slider.dart';
 
 class BodyScreen extends StatefulWidget {

@@ -1,11 +1,12 @@
-import 'package:e_commerce/cart/cart_screen.dart';
-import 'package:e_commerce/home/home_screen.dart';
-import 'package:e_commerce/orders/order_screen.dart';
-import 'package:e_commerce/profile/profile_screen.dart';
-import 'package:e_commerce/wallet/wallet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+import '../cart/cart_screen.dart';
+import '../orders/order_screen.dart';
+import '../profile/profile_screen.dart';
+import '../wallet/wallet_screen.dart';
+import 'home_screen.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {

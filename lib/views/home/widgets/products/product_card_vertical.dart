@@ -1,10 +1,11 @@
+import 'package:e_commerce/constants/ColorConstants.dart';
 import 'package:e_commerce/constants/styles/shadows.dart';
 import 'package:e_commerce/constants/text/product_title_text.dart';
-import 'package:e_commerce/home/widgets/products/product_price.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../constants/sizes.dart';
+import '../../../../constants/sizes.dart';
+import 'product_price.dart';
 
 class ProductCardVertical extends StatelessWidget {
   const ProductCardVertical({super.key});
@@ -62,8 +63,8 @@ class ProductCardVertical extends StatelessWidget {
                   Positioned(
                     right: 3,
                     child: Container(
-                      width: 30,
-                      height: 30,
+                      width: Sized.iconMd * 1.3,
+                      height: Sized.iconMd * 1.3,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
                         color: Colors.black,
@@ -110,16 +111,27 @@ class ProductCardVertical extends StatelessWidget {
                         size: Sized.iconXs,
                         color: Colors.blue,
                       ),
-                      const SizedBox(width: Sized.md),
-                      Text(
-                        '6,937 sold',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.labelMedium,
+                      const SizedBox(width: Sized.spaceBtwItems),
+                      Flexible(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.19,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: MyColors.softGrey,
+                          ),
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(6),
+                          child: Text(
+                            '6,937 sold',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                        ),
                       ),
                     ],
                   ),
-
                   // Price
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

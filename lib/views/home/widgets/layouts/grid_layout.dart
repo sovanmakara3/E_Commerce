@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/sizes.dart';
+import '../../../../constants/sizes.dart';
 
 class MyGridLayout extends StatelessWidget {
   const MyGridLayout({
