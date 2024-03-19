@@ -40,7 +40,7 @@ class BannerSlider extends StatelessWidget {
                 options: CarouselOptions(
                   onPageChanged: (index, _) =>
                       controller.updatePageIndicator(index),
-                  height: 200,
+                  height: MediaQuery.of(context).size.height * 0.25,
                   autoPlay: false,
                   viewportFraction: 1,
                   autoPlayCurve: Curves.fastOutSlowIn,

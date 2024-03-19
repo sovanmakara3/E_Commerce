@@ -153,7 +153,7 @@ class AppBars extends StatelessWidget {
                     Navigator.push(
                       context,
                       PageTransition(
-                        type: PageTransitionType.fade,
+                        type: PageTransitionType.rightToLeft,
                         duration: const Duration(milliseconds: 300),
                         child: const SearchScreen(),
                       ),
@@ -176,8 +176,8 @@ class AppBars extends StatelessWidget {
                           'Search for products',
                           style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
-                        SizedBox(width: 150),
-                        Icon(Iconsax.setting_4)
+                        Spacer(),
+                        Icon(Iconsax.setting_4),
                       ],
                     ),
                   ),

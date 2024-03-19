@@ -1,3 +1,4 @@
+import 'package:e_commerce/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -22,9 +23,9 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 235,
       child: GridView.builder(
-        padding: const EdgeInsets.only(top: 24),
+        shrinkWrap: true,
+        padding: const EdgeInsets.only(top: Sized.defaultSpace),
         physics: const NeverScrollableScrollPhysics(),
         itemCount: categories.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -34,23 +35,30 @@ class CategoryScreen extends StatelessWidget {
         ),
         itemBuilder: (BuildContext context, int index) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 padding: const EdgeInsets.all(16),
                 width: 56,
-                height: 56,
                 decoration: BoxDecoration(
                   color: Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(50),
                 ),
-                child: Image.asset(categories[index].imageUrl!),
+                child: Image.asset(
+                  categories[index].imageUrl!,
+                  fit: BoxFit.contain,
+                ),
               ),
               const SizedBox(height: 10),
-              Text(
-                categories[index].title!,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+              Expanded(
+                child: Text(
+                  categories[index].title!,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

@@ -25,6 +25,7 @@ class ProductCardVertical extends StatelessWidget {
           children: [
             // Thumbnail, wishlist, button, discount tag
             Container(
+              width: double.infinity,
               height: 180,
               padding: const EdgeInsets.all(Sized.sm),
               decoration: BoxDecoration(
@@ -59,8 +60,7 @@ class ProductCardVertical extends StatelessWidget {
 
                   /// -- Favorite Icons Button
                   Positioned(
-                    top: 10,
-                    right: 10,
+                    right: 3,
                     child: Container(
                       width: 30,
                       height: 30,
@@ -68,6 +68,7 @@ class ProductCardVertical extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100),
                         color: Colors.black,
                       ),
+                      alignment: Alignment.center,
                       child: IconButton(
                         onPressed: () {},
                         icon: const Icon(
