@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/response/status.dart';
+import '../home/skeletons/product_skeleton.dart';
+import '../home/viewmodels/products_vm.dart';
 import '../home/widgets/layouts/grid_layout.dart';
 import '../home/widgets/products/product_card_vertical.dart';
 
-class FavoriteScreen extends StatelessWidget {
+class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
+
+  @override
+  State<FavoriteScreen> createState() => _FavoriteScreenState();
+}
+
+class _FavoriteScreenState extends State<FavoriteScreen> {
+  var _productViewModel = ProductViewModel();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _productViewModel.getAllProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +63,31 @@ class FavoriteScreen extends StatelessWidget {
             // Tabbar Vertical
 
             // Product Card Vertical
-            MyGridLayout(
-              itemCount: 8,
-              itemBuilder: (_, index) => ProductCardVertical(),
+            ChangeNotifierProvider(
+              create: (context) => _productViewModel,
+              child: Consumer<ProductViewModel>(
+                builder: (context, productViewModel, _) {
+                  switch (productViewModel.response.status!) {
+                    case Status.LOADING:
+                      return MyGridLayout(
+                        itemCount: 10,
+                        itemBuilder: (context, index) =>
+                            const ProductCardSkeleton(),
+                      );
+                    case Status.COMPLETED:
+                      return MyGridLayout(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          var product =
+                              productViewModel.response.data!.data![index];
+                          return ProductCardVertical(product: product);
+                        },
+                      );
+                    case Status.ERROR:
+                      return const Text('Error');
+                  }
+                },
+              ),
             ),
           ],
         ),

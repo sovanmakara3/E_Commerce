@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 import '../app_exception.dart';
 
 class ApiService {
+  // Post Api
+
+  // Get Api
   Future<dynamic> getApi(url) async {
     http.StreamedResponse? response;
     try {
@@ -17,6 +20,7 @@ class ApiService {
   }
 
   returnResponse(http.StreamedResponse response) async {
+    // print('response: ${response.reasonPhrase}');
     switch (response.statusCode) {
       case 200:
         return await response.stream.bytesToString();

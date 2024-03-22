@@ -1,5 +1,6 @@
 import 'package:e_commerce/data/response/status.dart';
 import 'package:e_commerce/views/home/skeletons/product_skeleton.dart';
+// import 'package:e_commerce/views/home/skeletons/product_skeleton.dart';
 import 'package:e_commerce/views/home/viewmodels/products_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,13 @@ class _BodyScreenState extends State<BodyScreen> {
   ];
 
   var _productViewModel = ProductViewModel();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _productViewModel.getAllProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,18 +118,17 @@ class _BodyScreenState extends State<BodyScreen> {
               switch (productViewModel.response.status!) {
                 case Status.LOADING:
                   return MyGridLayout(
-                    itemCount: 20,
-                    itemBuilder: (context, index) => ProductCardVertical(),
+                    itemCount: 10,
+                    itemBuilder: (context, index) =>
+                        const ProductCardSkeleton(),
                   );
                 case Status.COMPLETED:
                   return MyGridLayout(
-                    itemCount: 20,
+                    itemCount: 10,
                     itemBuilder: (context, index) {
                       var product =
                           productViewModel.response.data!.data![index];
-                      return ProductCardVertical(
-                        product: product,
-                      );
+                      return ProductCardVertical(product: product);
                     },
                   );
                 case Status.ERROR:
