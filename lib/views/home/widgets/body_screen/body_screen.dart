@@ -1,11 +1,15 @@
+import 'package:e_commerce/data/response/status.dart';
+import 'package:e_commerce/views/home/skeletons/product_skeleton.dart';
+import 'package:e_commerce/views/home/viewmodels/products_vm.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../constants/sizes.dart';
-import '../../../most_popular/mostpopular_screen.dart';
-import '../../../special_offer/special_offer_screen.dart';
 import '../category_homescreen/category.dart';
 import '../layouts/grid_layout.dart';
+import '../most_popular/mostpopular_screen.dart';
 import '../products/product_card_vertical.dart';
 import '../promotion_slide/promotion_slider.dart';
+import '../special_offer/special_offer_screen.dart';
 
 class BodyScreen extends StatefulWidget {
   const BodyScreen({super.key});
@@ -22,6 +26,8 @@ class _BodyScreenState extends State<BodyScreen> {
     'assets/banners/happygirl.jpg',
     'assets/banners/shoes.jpg'
   ];
+
+  var _productViewModel = ProductViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +103,32 @@ class _BodyScreenState extends State<BodyScreen> {
 
         // Product Card Vertical
         const SizedBox(height: Sized.spaceBtwItems),
-        MyGridLayout(
-          itemCount: 8,
-          itemBuilder: (_, index) => const ProductCardVertical(),
+        ChangeNotifierProvider(
+          create: (context) => _productViewModel,
+          child: Consumer<ProductViewModel>(
+            builder: (context, productViewModel, _) {
+              switch (productViewModel.response.status!) {
+                case Status.LOADING:
+                  return MyGridLayout(
+                    itemCount: 20,
+                    itemBuilder: (context, index) => ProductCardVertical(),
+                  );
+                case Status.COMPLETED:
+                  return MyGridLayout(
+                    itemCount: 20,
+                    itemBuilder: (context, index) {
+                      var product =
+                          productViewModel.response.data!.data![index];
+                      return ProductCardVertical(
+                        product: product,
+                      );
+                    },
+                  );
+                case Status.ERROR:
+                  return const Text('Error');
+              }
+            },
+          ),
         ),
       ],
     );

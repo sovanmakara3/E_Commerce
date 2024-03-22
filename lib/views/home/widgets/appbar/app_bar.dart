@@ -4,8 +4,8 @@ import 'package:page_transition/page_transition.dart';
 import '../../../../constants/sizes.dart';
 import '../../../favorite/favorite_screen.dart';
 import '../../../notification/notification_screen.dart';
-import '../../../search_screen/search_screen.dart';
 import '../body_screen/body_screen.dart';
+import '../search_screen/search_screen.dart';
 
 class AppBars extends StatelessWidget {
   const AppBars({super.key});

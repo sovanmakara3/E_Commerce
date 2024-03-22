@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../controllers/home_controller.dart';
-import '../indecator.dart';
+import 'indecator.dart';
 
 class BannerSlider extends StatelessWidget {
   BannerSlider({

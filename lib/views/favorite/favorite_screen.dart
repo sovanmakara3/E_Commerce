@@ -47,7 +47,7 @@ class FavoriteScreen extends StatelessWidget {
             // Product Card Vertical
             MyGridLayout(
               itemCount: 8,
-              itemBuilder: (_, index) => const ProductCardVertical(),
+              itemBuilder: (_, index) => ProductCardVertical(),
             ),
           ],
         ),
