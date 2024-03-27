@@ -4,7 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../constants/sizes.dart';
 import '../../../constants/text/product_title_text.dart';
-import '../widgets/products/product_price.dart';
+import '../../../constants/text/product_price.dart';
 
 class ProductCardSkeleton extends StatelessWidget {
   const ProductCardSkeleton({super.key});

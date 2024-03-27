@@ -22,7 +22,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _productViewModel.getAllProducts();
+    _productViewModel.getAllProduct();
   }
 
   @override

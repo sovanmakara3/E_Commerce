@@ -28,13 +28,12 @@ class _BodyScreenState extends State<BodyScreen> {
     'assets/banners/shoes.jpg'
   ];
 
-  var _productViewModel = ProductViewModel();
+  final _productViewModel = ProductViewModel();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _productViewModel.getAllProducts();
+    _productViewModel.getAllProduct();
   }
 
   @override
@@ -118,13 +117,13 @@ class _BodyScreenState extends State<BodyScreen> {
               switch (productViewModel.response.status!) {
                 case Status.LOADING:
                   return MyGridLayout(
-                    itemCount: 10,
+                    itemCount: 20,
                     itemBuilder: (context, index) =>
                         const ProductCardSkeleton(),
                   );
                 case Status.COMPLETED:
                   return MyGridLayout(
-                    itemCount: 10,
+                    itemCount: 20,
                     itemBuilder: (context, index) {
                       var product =
                           productViewModel.response.data!.data![index];

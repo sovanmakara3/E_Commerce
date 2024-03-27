@@ -1,5 +1,6 @@
 import 'package:e_commerce/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 // ignore: must_be_immutable
 class CategoryScreen extends StatelessWidget {
@@ -9,14 +10,14 @@ class CategoryScreen extends StatelessWidget {
   List<Items> categories = [
     Items(title: 'Clothes', imageUrl: 'assets/category_icons/t-shirt.png'),
     Items(title: 'Shoes', imageUrl: 'assets/category_icons/boot.png'),
-    Items(title: 'Bags', imageUrl: 'assets/category_icons/handbag.png'),
+    Items(title: 'Sport', imageUrl: 'assets/category_icons/tennis-racket.png'),
     Items(
         title: 'Electronics',
         imageUrl: 'assets/category_icons/computer-screen.png'),
-    Items(title: 'Watch', imageUrl: 'assets/category_icons/smartwatch.png'),
-    Items(title: 'Jewelry', imageUrl: 'assets/category_icons/diamond.png'),
-    Items(title: 'Kitchen', imageUrl: 'assets/category_icons/ladle.png'),
-    Items(title: 'Toys', imageUrl: 'assets/category_icons/teddy-bear.png'),
+    // Items(title: 'Watch', imageUrl: 'assets/category_icons/smartwatch.png'),
+    // Items(title: 'Jewelry', imageUrl: 'assets/category_icons/diamond.png'),
+    // Items(title: 'Kitchen', imageUrl: 'assets/category_icons/ladle.png'),
+    // Items(title: 'Toys', imageUrl: 'assets/category_icons/teddy-bear.png'),
   ];
 
   @override
@@ -37,16 +38,19 @@ class CategoryScreen extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                width: 56,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: Image.asset(
-                  categories[index].imageUrl!,
-                  fit: BoxFit.contain,
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  width: 56,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Image.asset(
+                    categories[index].imageUrl!,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               const SizedBox(height: 10),

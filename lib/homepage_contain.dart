@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import '../cart/cart_screen.dart';
-import '../orders/order_screen.dart';
-import '../profile/profile_screen.dart';
-import '../wallet/wallet_screen.dart';
+import 'views/cart/cart_screen.dart';
+import 'views/orders/order_screen.dart';
+import 'views/profile/profile_screen.dart';
+import 'views/wallet/wallet_screen.dart';
 import 'home_screen.dart';
 
 // ignore: must_be_immutable
