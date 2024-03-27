@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
 import '../../../constants/sizes.dart';
-import '../../../constants/text/product_title_text.dart';
-import '../../../constants/text/product_price.dart';
 
 class ProductCardSkeleton extends StatelessWidget {
   const ProductCardSkeleton({super.key});
@@ -32,11 +30,6 @@ class ProductCardSkeleton extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  /// -- Thubnail Image
-                  // Image.asset(
-                  //   '',
-                  // ),
-
                   /// -- Favorite Icons Button
                   Positioned(
                     right: 3,
@@ -68,74 +61,35 @@ class ProductCardSkeleton extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MyProductTitleText(
-                    title: 'Green Nike Air Shoes',
-                    smallSize: true,
+                  const Text(
+                    'Green Nike Air Shoes',
                   ),
                   const SizedBox(height: Sized.spaceBtwItems / 2),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Nike',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.labelMedium,
+                      RatingBarIndicator(
+                        itemBuilder: (context, index) => const Icon(
+                          Iconsax.star1,
+                        ),
+                        itemCount: 1,
+                        itemSize: 26,
                       ),
                       const SizedBox(width: Sized.xs),
-                      const Icon(
-                        Iconsax.verify5,
-                        size: Sized.iconXs,
-                        color: Colors.blue,
-                      ),
+                      const Text('10.0'),
                       const SizedBox(width: Sized.spaceBtwItems),
-                      Flexible(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.19,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(6),
-                          child: Text(
-                            '6,937 sold',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.19,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
                         ),
+                        child: const Text('sold'),
                       ),
                     ],
                   ),
                   // Price
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Price
-                      const MyProductPriceText(price: '35.5'),
-
-                      // Add to Cart Button
-                      Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(Sized.cardRadiusMd),
-                            bottomRight: Radius.circular(
-                              Sized.productImageRadius,
-                            ),
-                          ),
-                        ),
-                        child: const SizedBox(
-                          width: Sized.iconLg * 1.2,
-                          height: Sized.iconLg * 1.2,
-                          child: Center(
-                            child: Icon(
-                              Iconsax.add,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  const Text('35.5'),
                 ],
               ),
             ),
