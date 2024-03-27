@@ -15,6 +15,7 @@ class AppBars extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             backgroundColor: Colors.white,
@@ -40,10 +41,6 @@ class AppBars extends StatelessWidget {
               children: [
                 Text(
                   'Good Morning!',
-                  // style: GoogleFonts.outfit(
-                  //     fontSize: 16,
-                  //     color: Colors.grey.shade700,
-                  //     fontWeight: FontWeight.w300),
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey.shade700,
@@ -52,7 +49,6 @@ class AppBars extends StatelessWidget {
                 ),
                 const Text(
                   'Sung Jin Woo',
-                  // style: GoogleFonts.outfit(fontWeight: FontWeight.w600),
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                   ),

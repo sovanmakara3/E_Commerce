@@ -9,7 +9,6 @@ class MyChoiceSize extends StatelessWidget {
   final String text;
   final bool selected;
   final void Function(bool)? onSelected;
-  final Color color = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class MyChoiceSize extends StatelessWidget {
       label: isColor ? const SizedBox() : Text(text),
       selected: selected,
       onSelected: onSelected,
-      labelStyle: TextStyle(color: selected ? MyColors.white : null),
+      labelStyle: TextStyle(color: selected ? MyColors.black : null),
       avatar: isColor
           ? Container(
               width: 50, height: 50, color: MyHelperFunction.getColor(text)!)
@@ -27,6 +26,7 @@ class MyChoiceSize extends StatelessWidget {
       padding: isColor ? const EdgeInsets.all(0) : null,
       shape: isColor ? const CircleBorder() : null,
       backgroundColor: isColor ? MyHelperFunction.getColor(text)! : null,
+      selectedColor: isColor ? MyColors.white : MyColors.grey,
     );
   }
 }

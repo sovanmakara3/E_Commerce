@@ -6,6 +6,8 @@ import 'package:e_commerce/views/home/widgets/product_detail/widgets/product_siz
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../constants/text/label_and_seeall.dart';
+import 'widgets/add_buy_button.dart';
 import 'widgets/rating_share.dart';
 import 'widgets/title_price.dart';
 
@@ -112,20 +114,11 @@ class ProductDetailScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Size',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text('see all'),
-                          ],
-                        ),
+                        /// Label Size
+                        const LabelAndSeeAll(),
                         const SizedBox(height: Sized.spaceBtwItems / 2),
+
+                        /// items of size
                         Wrap(
                           spacing: 8,
                           children: [
@@ -159,6 +152,7 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: const BuyAndAddToCart(),
     );
   }
 }
