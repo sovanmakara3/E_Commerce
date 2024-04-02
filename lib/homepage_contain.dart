@@ -5,7 +5,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'views/cart/cart_screen.dart';
 import 'views/orders/order_screen.dart';
 import 'views/profile/profile_screen.dart';
-import 'views/wallet/wallet_screen.dart';
+import 'views/add_products/add_product_screen.dart';
 import 'home_screen.dart';
 
 // ignore: must_be_immutable
@@ -22,8 +22,8 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetOptions = [
     const HomeScreen(),
     const CartScreen(),
+    const AddProductScreen(),
     const OrderScreen(),
-    const WalletScreen(),
     const ProfileScreen(),
   ];
   void _onItemTapped(int index) {
@@ -60,20 +60,21 @@ class _HomePageState extends State<HomePage> {
             activeIcon: const Icon(Iconsax.shopping_bag5),
           ),
 
+          /// Add Product
+          SalomonBottomBarItem(
+            unselectedColor: Colors.black,
+            icon: const Icon(Iconsax.add_square),
+            title: const Text("Add new"),
+            selectedColor: Colors.black,
+            activeIcon: const Icon(Iconsax.add_square5),
+          ),
+
           /// Orders
           SalomonBottomBarItem(
             icon: const Icon(Iconsax.shopping_cart),
             title: const Text("Orders"),
             selectedColor: Colors.black,
             activeIcon: const Icon(Iconsax.shopping_cart5),
-          ),
-
-          /// Wallet
-          SalomonBottomBarItem(
-            icon: const Icon(Iconsax.empty_wallet),
-            title: const Text("Wallet"),
-            selectedColor: Colors.black,
-            activeIcon: const Icon(Iconsax.empty_wallet5),
           ),
 
           /// Profile

@@ -7,14 +7,16 @@ class SpecialOfferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
           padding: const EdgeInsets.only(left: 16),
           onPressed: () {
             Navigator.pop(context);
           },
           icon: const Icon(
-            Iconsax.arrow_left,
+            Iconsax.arrow_left_2,
             color: Colors.black,
           ),
         ),

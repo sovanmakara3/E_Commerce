@@ -4,7 +4,9 @@ import 'package:e_commerce/constants/styles/shadows.dart';
 import 'package:e_commerce/views/home/model/product.dart';
 import 'package:e_commerce/views/home/viewmodels/products_vm.dart';
 import 'package:e_commerce/views/home/widgets/product_detail/product_details_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:page_transition/page_transition.dart';
@@ -44,10 +46,8 @@ class ProductCardVertical extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 180,
-              // padding: const EdgeInsets.all(Sized.sm),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Colors.grey.shade100,
               ),
               child: Stack(
                 children: [
@@ -112,9 +112,12 @@ class ProductCardVertical extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+
+                  /// Rating star and product qty
                   const SizedBox(height: Sized.spaceBtwItems / 2),
                   Row(
                     children: [
+                      // Rating star
                       RatingBarIndicator(
                         rating: 5 / 10,
                         itemBuilder: (context, index) => const Icon(
@@ -126,18 +129,20 @@ class ProductCardVertical extends StatelessWidget {
                       ),
                       const SizedBox(width: Sized.xs),
                       Text('${product!.attributes!.rating}'),
-                      const SizedBox(width: Sized.spaceBtwItems),
+
+                      /// Produts Qty
+                      const Spacer(),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.19,
+                        margin: const EdgeInsets.only(right: 8),
+                        width: MediaQuery.of(context).size.width * 0.2,
                         height: 30,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: MyColors.softGrey,
                         ),
                         alignment: Alignment.center,
-                        // padding: const EdgeInsets.all(6),
                         child: Text(
-                          '${product!.attributes!.quantity!} sold',
+                          '${product!.attributes!.quantity} available',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.labelMedium,
@@ -181,6 +186,16 @@ class ProductCardVertical extends StatelessWidget {
                       //     ),
                       //   ),
                       // ),
+
+                      /// More Button
+                      InkWell(
+                        splashColor: MyColors.grey,
+                        onTap: () {},
+                        child: const Padding(
+                          padding: EdgeInsets.only(right: 8.0),
+                          child: Icon(Iconsax.more),
+                        ),
+                      )
                     ],
                   ),
                 ],

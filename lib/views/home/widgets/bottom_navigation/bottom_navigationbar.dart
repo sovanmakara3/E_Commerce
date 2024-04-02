@@ -42,20 +42,20 @@ class _NavigationBarsState extends State<NavigationBars> {
           activeIcon: Icon(MdiIcons.shopping),
         ),
 
-        /// Orders
-        SalomonBottomBarItem(
-          icon: Icon(MdiIcons.cartOutline),
-          title: const Text("Orders"),
-          selectedColor: Colors.black,
-          activeIcon: Icon(MdiIcons.cart),
-        ),
-
         /// Wallet
         SalomonBottomBarItem(
           icon: Icon(MdiIcons.walletBifoldOutline),
           title: const Text("Wallet"),
           selectedColor: Colors.black,
           activeIcon: Icon(MdiIcons.walletBifold),
+        ),
+
+        /// Orders
+        SalomonBottomBarItem(
+          icon: Icon(MdiIcons.cartOutline),
+          title: const Text("Orders"),
+          selectedColor: Colors.black,
+          activeIcon: Icon(MdiIcons.cart),
         ),
 
         /// Profile
