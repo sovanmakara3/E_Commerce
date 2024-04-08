@@ -1,5 +1,6 @@
 import 'package:e_commerce/data/network/api_service.dart';
 import 'package:e_commerce/res/app_url.dart';
+import 'package:e_commerce/views/add_products/models/request/product_request.dart';
 import 'package:e_commerce/views/home/model/product.dart';
 
 class ProductRepository {
@@ -16,4 +17,10 @@ class ProductRepository {
   }
 
   /// Upload Products
+  Future<dynamic> postProduct(data) async {
+    var productRequest = productRequestToJson(data);
+    dynamic response =
+        await apiService.postProduct(AppUrl.postProducts, productRequest);
+    return response;
+  }
 }

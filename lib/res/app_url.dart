@@ -8,4 +8,7 @@ class AppUrl {
   // Categories
   static var getAllCategories = "$baseUrl/api/e-commerce-categories?pupulate=*";
   static var postCategories = "$baseUrl/api/e-commerce-categories";
+
+  // Upload image
+  static var uploadImage = "$baseUrl/api/upload";
 }

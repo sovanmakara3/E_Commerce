@@ -1,15 +1,15 @@
 import 'package:e_commerce/constants/colors/ColorConstants.dart';
 import 'package:e_commerce/constants/styles/shadows.dart';
-// import 'package:e_commerce/constants/text/product_title_text.dart';
+import 'package:e_commerce/data/response/status.dart';
 import 'package:e_commerce/views/home/model/product.dart';
+import 'package:e_commerce/views/home/skeletons/product_detail_skeleton.dart';
 import 'package:e_commerce/views/home/viewmodels/products_vm.dart';
 import 'package:e_commerce/views/home/widgets/product_detail/product_details_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/sizes.dart';
 
@@ -17,7 +17,10 @@ class ProductCardVertical extends StatelessWidget {
   ProductCardVertical({super.key, this.product});
 
   final Datum? product;
+
   final ProductViewModel productViewModel = ProductViewModel();
+
+  final domainUrl = 'https://cms.istad.co';
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,7 @@ class ProductCardVertical extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: Image.network(
-                        'https://cms.istad.co${product?.attributes?.thumbnail?.data?.attributes?.url}',
+                        '$domainUrl${product?.attributes?.thumbnail?.data?.attributes?.url}',
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return const Center(
@@ -142,7 +145,7 @@ class ProductCardVertical extends StatelessWidget {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          '${product!.attributes!.quantity} available',
+                          '${product?.attributes?.quantity ?? '0'} in stock',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.labelMedium,
@@ -162,30 +165,6 @@ class ProductCardVertical extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      // GestureDetector(
-                      //   onTap: () {},
-                      //   child: Container(
-                      //     decoration: const BoxDecoration(
-                      //       color: Colors.black,
-                      //       borderRadius: BorderRadius.only(
-                      //         topLeft: Radius.circular(Sized.cardRadiusMd),
-                      //         bottomRight: Radius.circular(
-                      //           Sized.productImageRadius,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     child: const SizedBox(
-                      //       width: Sized.iconLg * 1.2,
-                      //       height: Sized.iconLg * 1.2,
-                      //       child: Center(
-                      //         child: Icon(
-                      //           Iconsax.add,
-                      //           color: Colors.white,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
 
                       /// More Button
                       InkWell(
@@ -195,7 +174,7 @@ class ProductCardVertical extends StatelessWidget {
                           padding: EdgeInsets.only(right: 8.0),
                           child: Icon(Iconsax.more),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ],
