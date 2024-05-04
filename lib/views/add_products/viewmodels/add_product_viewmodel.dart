@@ -11,10 +11,10 @@ class AddProductViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<dynamic> postProduct(data) async {
+  Future<dynamic> postProduct(data, {isFromUpdate, id}) async {
     setProductData(ApiResponse.loading());
     await _productRepo
-        .postProduct(data)
+        .postProduct(data, isFromUpdate: isFromUpdate, id: id)
         .then((isPosted) => setProductData(ApiResponse.completed(isPosted)))
         .onError((error, stackTrace) =>
             setProductData(ApiResponse.error(stackTrace.toString())));

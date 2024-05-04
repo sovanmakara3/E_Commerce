@@ -3,7 +3,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'views/cart/cart_screen.dart';
-import 'views/orders/order_screen.dart';
 import 'views/profile/profile_screen.dart';
 import 'views/add_products/add_product_screen.dart';
 import 'home_screen.dart';
@@ -22,9 +21,11 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetOptions = [
     const HomeScreen(),
     const CartScreen(),
-    const AddProductScreen(),
-    const OrderScreen(),
-    ProfileScreen(),
+    AddProductScreen(
+      isFromUpdate: false,
+    ),
+    // const OrderScreen(),
+    const ProfileScreen(),
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -70,12 +71,12 @@ class _HomePageState extends State<HomePage> {
           ),
 
           /// Orders
-          SalomonBottomBarItem(
-            icon: const Icon(Iconsax.shopping_cart),
-            title: const Text("Orders"),
-            selectedColor: Colors.black,
-            activeIcon: const Icon(Iconsax.shopping_cart5),
-          ),
+          // SalomonBottomBarItem(
+          //   icon: const Icon(Iconsax.shopping_cart),
+          //   title: const Text("Orders"),
+          //   selectedColor: Colors.black,
+          //   activeIcon: const Icon(Iconsax.shopping_cart5),
+          // ),
 
           /// Profile
           SalomonBottomBarItem(

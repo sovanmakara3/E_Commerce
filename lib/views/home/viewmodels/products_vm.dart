@@ -5,10 +5,24 @@ import 'package:flutter/material.dart';
 class ProductViewModel extends ChangeNotifier {
   final _productRepo = ProductRepository();
   ApiResponse<dynamic> response = ApiResponse.loading();
+  var deleteResponse = ApiResponse();
 
   setProductList(response) {
     this.response = response;
     notifyListeners();
+  }
+
+  setDeleteResponse(response) {
+    deleteResponse = response;
+    notifyListeners();
+  }
+
+  Future<dynamic> deleteProduct(id) async {
+    await _productRepo
+        .deleteProduct(id)
+        .then((data) => setDeleteResponse(ApiResponse.completed(data)))
+        .onError((error, stackTrace) =>
+            setDeleteResponse(ApiResponse.error(stackTrace.toString())));
   }
 
   Future<dynamic> getAllProduct() async {

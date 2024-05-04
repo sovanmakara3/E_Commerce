@@ -17,10 +17,19 @@ class ProductRepository {
   }
 
   /// Upload Products
-  Future<dynamic> postProduct(data) async {
+  Future<dynamic> postProduct(data, {isFromUpdate, id}) async {
+    print('product id $id');
     var productRequest = productRequestToJson(data);
+    var url = isFromUpdate ? '${AppUrl.postProducts}/$id' : AppUrl.postProducts;
     dynamic response =
-        await apiService.postProduct(AppUrl.postProducts, productRequest);
+        await apiService.postProduct(url, productRequest, isFromUpdate);
+    return response;
+  }
+
+  //Delete Products
+  Future<dynamic> deleteProduct(id) async {
+    dynamic response =
+        await apiService.deleteRestaurant('${AppUrl.postProducts}/$id');
     return response;
   }
 }

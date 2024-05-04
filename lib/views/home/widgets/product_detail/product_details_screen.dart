@@ -4,6 +4,7 @@ import 'package:e_commerce/constants/styles/shadows.dart';
 import 'package:e_commerce/helper_functions/helper_function.dart';
 import 'package:e_commerce/views/home/model/product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 import 'widgets/class/quantity_helper.dart';
@@ -242,7 +243,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     const SizedBox(height: Sized.spaceBtwItems),
 
                     // - Size
-                    const SizeDetail(),
+                    const Wrap(
+                      runSpacing: 16,
+                      children: [
+                        SizeDetail(size: "S"),
+                        SizeDetail(size: "M"),
+                        SizeDetail(size: "L"),
+                        SizeDetail(size: "XL"),
+                        SizeDetail(size: "XXL"),
+                      ],
+                    ),
                     const SizedBox(height: Sized.spaceBtwItems),
 
                     // - Product Quantity

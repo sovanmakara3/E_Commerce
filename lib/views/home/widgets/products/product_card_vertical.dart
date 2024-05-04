@@ -1,8 +1,9 @@
 import 'package:e_commerce/constants/colors/ColorConstants.dart';
 import 'package:e_commerce/constants/styles/shadows.dart';
 import 'package:e_commerce/data/response/status.dart';
+import 'package:e_commerce/views/add_products/add_product_screen.dart';
+import 'package:e_commerce/views/cart/viewmodels/favorite_viewmodels.dart';
 import 'package:e_commerce/views/home/model/product.dart';
-import 'package:e_commerce/views/home/skeletons/product_detail_skeleton.dart';
 import 'package:e_commerce/views/home/viewmodels/products_vm.dart';
 import 'package:e_commerce/views/home/widgets/product_detail/product_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +14,22 @@ import 'package:provider/provider.dart';
 
 import '../../../../constants/sizes.dart';
 
-class ProductCardVertical extends StatelessWidget {
+class ProductCardVertical extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   ProductCardVertical({super.key, this.product});
 
-  final Datum? product;
+  Datum? product;
 
+  @override
+  State<ProductCardVertical> createState() => _ProductCardVerticalState();
+}
+
+class _ProductCardVerticalState extends State<ProductCardVertical> {
   final ProductViewModel productViewModel = ProductViewModel();
 
   final domainUrl = 'https://cms.istad.co';
+
+  bool showFilterDialog = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +40,7 @@ class ProductCardVertical extends StatelessWidget {
           PageTransition(
             type: PageTransitionType.rightToLeft,
             duration: const Duration(milliseconds: 300),
-            child: ProductDetailScreen(products: product),
+            child: ProductDetailScreen(products: widget.product),
           ),
         );
       },
@@ -60,7 +69,7 @@ class ProductCardVertical extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: Image.network(
-                        '$domainUrl${product?.attributes?.thumbnail?.data?.attributes?.url}',
+                        '$domainUrl${widget.product?.attributes?.thumbnail?.data?.attributes?.url}',
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return const Center(
@@ -86,12 +95,18 @@ class ProductCardVertical extends StatelessWidget {
                         color: Colors.black,
                       ),
                       alignment: Alignment.center,
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Iconsax.heart,
-                          color: Colors.white,
-                          size: Sized.iconSm,
+                      child: ChangeNotifierProvider(
+                        create: (_) => FavoriteProvider(),
+                        child: Consumer<FavoriteProvider>(
+                          builder: (context, favoriteProvider, _) {
+                            return IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Iconsax.heart,
+                                  color: Colors.white,
+                                  size: Sized.iconSm,
+                                ));
+                          },
                         ),
                       ),
                     ),
@@ -109,7 +124,7 @@ class ProductCardVertical extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${product!.attributes!.title}',
+                    '${widget.product!.attributes!.title}',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -131,7 +146,7 @@ class ProductCardVertical extends StatelessWidget {
                         itemSize: 26,
                       ),
                       const SizedBox(width: Sized.xs),
-                      Text('${product!.attributes!.rating}'),
+                      Text('${widget.product!.attributes!.rating}'),
 
                       /// Produts Qty
                       const Spacer(),
@@ -145,7 +160,7 @@ class ProductCardVertical extends StatelessWidget {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          '${product?.attributes?.quantity ?? '0'} in stock',
+                          '${widget.product?.attributes?.quantity ?? '0'} in stock',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.labelMedium,
@@ -159,7 +174,7 @@ class ProductCardVertical extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$${product!.attributes!.price!}',
+                        '\$${widget.product!.attributes!.price!}',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -169,7 +184,12 @@ class ProductCardVertical extends StatelessWidget {
                       /// More Button
                       InkWell(
                         splashColor: MyColors.grey,
-                        onTap: () {},
+                        onTap: () {
+                          setState(() {
+                            showFilterDialog = true;
+                          });
+                          _showFilterDialog(context);
+                        },
                         child: const Padding(
                           padding: EdgeInsets.only(right: 8.0),
                           child: Icon(Iconsax.more),
@@ -180,6 +200,113 @@ class ProductCardVertical extends StatelessWidget {
                 ],
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future _showFilterDialog(BuildContext context) {
+    return showModalBottomSheet(
+      enableDrag: true,
+      isScrollControlled: true,
+      context: context,
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Edit the Product',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: Sized.defaultSpace),
+
+            // Update
+            SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddProductScreen(
+                              isFromUpdate: true, product: widget.product)));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey.shade300,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Iconsax.refresh_circle, color: Colors.black),
+                    SizedBox(width: Sized.spaceBtwItems),
+                    Text(
+                      'Update',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: Sized.defaultSpace),
+
+            // Remove
+            SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: ChangeNotifierProvider(
+                create: (context) => productViewModel,
+                child: Consumer<ProductViewModel>(
+                  builder: (context, viewmodel, _) {
+                    if (viewmodel.response.status == Status.COMPLETED) {
+                      print('delete completed');
+                      Navigator.pop(context);
+                    }
+                    return ElevatedButton(
+                      onPressed: () {
+                        productViewModel.deleteProduct(widget.product!.id);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Iconsax.trash,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: Sized.spaceBtwItems),
+                          Text(
+                            'Delete',
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: Sized.spaceBtwItems),
           ],
         ),
       ),

@@ -1,7 +1,9 @@
 import 'package:e_commerce/constants/colors/ColorConstants.dart';
-import 'package:e_commerce/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../constants/sizes.dart';
+import 'widgets/product_card.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -11,7 +13,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  int? _selectedValue;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,129 +32,79 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: 20,
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
+      body: ListView(
         padding: const EdgeInsets.all(16),
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(
-              // top: 8,
-              bottom: Sized.defaultSpace,
-            ),
-            child: Container(
-              width: double.infinity,
-              height: 140,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 130,
-                    height: 140,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Image.network(
-                        'https://cdn.shopify.com/s/files/1/0584/9363/2674/products/TTS202S52612F22_TAUPE_1_1024x1024.jpg?v=1679561804',
-                        fit: BoxFit.cover,
+        children: const [
+          ProductCard(),
+          ProductCard(),
+          ProductCard(),
+          ProductCard(),
+          ProductCard(),
+          ProductCard(),
+        ],
+      ),
+      bottomSheet: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: Sized.defaultSpace,
+            right: Sized.defaultSpace,
+            top: 8,
+            bottom: 8,
+          ),
+          child: SizedBox(
+            height: 55,
+            child: Row(
+              children: [
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Total price'),
+                    Text(
+                      '\$0.00',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                  ],
+                ),
+                const SizedBox(width: Sized.defaultSpace),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                        elevation: 10,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(40)),
+                        ),
+                        fixedSize: const Size(150, 60)),
+                    label: const Text(
+                      'Buy Now',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    icon: const Icon(
+                      Iconsax.money_send,
+                      size: 20,
+                    ),
                   ),
-                  const SizedBox(width: Sized.spaceBtwItems),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        children: [
-                          const Text(
-                            'Essential T-shirt',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-
-                          /// Radio button
-                          Radio(
-                            value: 0,
-                            groupValue: _selectedValue,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedValue =
-                                    (_selectedValue == value) ? null : value;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: Sized.spaceBtwItems),
-                      const Text(
-                        'Size = M',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            '\$385.00',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(width: Sized.spaceBtwItems),
-                          Container(
-                            width: 110,
-                            height: 35,
-                            decoration: BoxDecoration(
-                              color: MyColors.grey,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Iconsax.minus,
-                                    size: 16,
-                                    color: Colors.black,
-                                    applyTextScaling: true,
-                                  ),
-                                ),
-                                const Text(
-                                  '1',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Iconsax.add,
-                                    size: 16,
-                                    color: Colors.black,
-                                    applyTextScaling: true,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

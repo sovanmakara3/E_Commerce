@@ -23,13 +23,6 @@ class NotificationScreen extends StatelessWidget {
           'Notifications',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        actions: [
-          IconButton(
-            padding: const EdgeInsets.only(right: 16),
-            onPressed: () {},
-            icon: const Icon(Iconsax.more_circle),
-          ),
-        ],
       ),
       body: const Padding(
         padding: EdgeInsets.all(16.0),
@@ -55,6 +48,15 @@ class NotificationScreen extends StatelessWidget {
               discountText: '20% Special Discount!',
               descriptionText: 'this promotion only valid today',
             ),
+            SizedBox(height: Sized.spaceBtwItems),
+            MyNotificationMessages(
+              icon: Icon(
+                Iconsax.location5,
+                color: Colors.white,
+              ),
+              discountText: 'New Services Available!',
+              descriptionText: 'Now you can track orders in real time',
+            ),
 
             // Yesterday Label
             SizedBox(height: Sized.defaultSpace),
@@ -73,16 +75,6 @@ class NotificationScreen extends StatelessWidget {
               ),
               discountText: 'Top Up E-Wallet Successfully!',
               descriptionText: 'You have to top up your e-wallet',
-            ),
-
-            SizedBox(height: Sized.spaceBtwItems),
-            MyNotificationMessages(
-              icon: Icon(
-                Iconsax.location5,
-                color: Colors.white,
-              ),
-              discountText: 'New Services Available!',
-              descriptionText: 'Now you can track orders in real time',
             ),
 
             // December 21 Label

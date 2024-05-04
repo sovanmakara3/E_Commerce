@@ -72,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: Image.network(
-                            'https://www.thetimes.co.uk/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F471a979e-cadc-11ec-a118-514c2c06bc05.jpg?crop=2383%2C2383%2C2174%2C60',
+                            'https://hips.hearstapps.com/hmg-prod/images/thor-1658259662.jpeg?crop=0.563xw:1.00xh;0.214xw,0&resize=1200:*',
                             fit: BoxFit.cover,
                           ),
                         ),

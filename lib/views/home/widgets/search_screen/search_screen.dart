@@ -31,7 +31,10 @@ class _SearchScreenState extends State<SearchScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Iconsax.arrow_left),
+              icon: const Icon(
+                Iconsax.arrow_left_2,
+                color: Colors.black,
+              ),
             ),
             Expanded(
               child: Padding(
@@ -114,26 +117,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 fontSize: Sized.fontSizeLg,
                 fontWeight: FontWeight.w500,
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.videocam),
-              title: Text('Video'),
-            ),
-            ListTile(
-              leading: Icon(Icons.videocam),
-              title: Text('Video'),
-            ),
-            ListTile(
-              leading: Icon(Icons.videocam),
-              title: Text('Video'),
-            ),
-            ListTile(
-              leading: Icon(Icons.videocam),
-              title: Text('Video'),
-            ),
-            ListTile(
-              leading: Icon(Icons.videocam),
-              title: Text('Video'),
             ),
             ListTile(
               leading: Icon(Icons.videocam),

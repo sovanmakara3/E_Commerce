@@ -5,13 +5,29 @@ import 'package:http/http.dart' as http;
 import '../app_exception.dart';
 
 class ApiService {
+  //Delete Product
+  Future<dynamic> deleteRestaurant(url) async {
+    var headers = {'accept': 'application/json'};
+    var request = http.Request('DELETE', Uri.parse(url));
+
+    request.headers.addAll(headers);
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
   // Post Product
-  Future<dynamic> postProduct(url, data) async {
+  Future<dynamic> postProduct(url, data, bool isFromUpdate) async {
     var headers = {
       'accept': 'application/json',
       'Content-Type': 'application/json'
     };
-    var request = http.Request('POST', Uri.parse(url));
+    var request = http.Request(isFromUpdate ? 'PUT' : 'POST', Uri.parse(url));
     request.body = data;
     request.headers.addAll(headers);
 

@@ -8,10 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../home/model/product.dart';
 import 'widgets/textfield_sample.dart';
 
+// ignore: must_be_immutable
 class AddProductScreen extends StatefulWidget {
-  const AddProductScreen({super.key});
+  AddProductScreen({this.product, this.isFromUpdate});
+
+  bool? isFromUpdate;
+  Datum? product;
 
   @override
   State<AddProductScreen> createState() => _AddProductScreenState();
@@ -20,7 +25,6 @@ class AddProductScreen extends StatefulWidget {
 class _AddProductScreenState extends State<AddProductScreen> {
   bool isPicked = false;
   final _imageViewModel = ImageViewModel();
-  var imageID;
 
   final nameController = TextEditingController();
   final priceController = TextEditingController();
@@ -30,6 +34,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final categoryController = TextEditingController();
 
   final _addProductViewModel = AddProductViewModel();
+
+  var imageID;
+  var productId;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIfFromUpdate();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,23 +63,35 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       onPressed: () {
                         _saveProduct();
                       },
-                      child: const Text(
-                        'Save',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.black,
-                        ),
-                      ),
+                      child: widget.isFromUpdate!
+                          ? const Text(
+                              'Update',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                            )
+                          : const Text(
+                              'Save',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                            ),
                     );
                   }
                   switch (viewModel.response.status!) {
                     case Status.LOADING:
                       return const Center(child: CircularProgressIndicator());
                     case Status.COMPLETED:
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Post Success'),
-                      ));
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text('Post Success'),
+                        ));
+                      });
                       return TextButton(
                         onPressed: () {
                           _saveProduct();
@@ -81,7 +106,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         ),
                       );
                     case Status.ERROR:
-                      return Text('Error');
+                      return const Text('Error');
                   }
                 },
               ),
@@ -101,6 +126,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     create: (context) => _imageViewModel,
                     child: Consumer<ImageViewModel>(
                       builder: (context, viewModel, _) {
+                        if (widget.isFromUpdate!) {
+                          return Image.network(
+                            'https://cms.istad.co${widget.product!.attributes!.thumbnail!.data!.attributes!.url!}',
+                            fit: BoxFit.cover,
+                          );
+                        }
                         if (viewModel.response.status == null) {
                           return Image.network(
                             'https://cdn-icons-png.flaticon.com/128/6590/6590965.png',
@@ -233,6 +264,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
       thumbnail: imageID.toString(),
     ));
 
-    _addProductViewModel.postProduct(productRequest);
+    _addProductViewModel.postProduct(productRequest,
+        isFromUpdate: widget.isFromUpdate, id: productId);
+  }
+
+  void checkIfFromUpdate() {
+    if (widget.isFromUpdate!) {
+      nameController.text = widget.product!.attributes!.title!;
+      priceController.text = widget.product!.attributes!.price!;
+      rateController.text = widget.product!.attributes!.rating!;
+      qtyController.text = widget.product!.attributes!.quantity!;
+      descriptionController.text = widget.product!.attributes!.description!;
+      categoryController.text =
+          widget.product!.attributes!.category!.toString();
+      imageID = widget.product!.id;
+      productId = widget.product!.id;
+    }
   }
 }
