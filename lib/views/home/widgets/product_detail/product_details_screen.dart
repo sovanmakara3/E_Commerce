@@ -327,7 +327,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               const SizedBox(width: Sized.defaultSpace),
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Add to Cart Successfully')));
+
+                      Navigator.pop(context);
+                    });
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
                       foregroundColor: Colors.white,

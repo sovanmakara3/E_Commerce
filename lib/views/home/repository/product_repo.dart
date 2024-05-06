@@ -17,7 +17,8 @@ class ProductRepository {
   }
 
   /// Upload Products
-  Future<dynamic> postProduct(data, {isFromUpdate, id}) async {
+  Future<bool> postProduct(data, {isFromUpdate, id}) async {
+    // ignore: avoid_print
     print('product id $id');
     var productRequest = productRequestToJson(data);
     var url = isFromUpdate ? '${AppUrl.postProducts}/$id' : AppUrl.postProducts;

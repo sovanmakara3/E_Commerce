@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:e_commerce/constants/colors/ColorConstants.dart';
 import 'package:e_commerce/constants/styles/shadows.dart';
 import 'package:e_commerce/data/response/status.dart';
@@ -30,6 +32,14 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
   final domainUrl = 'https://cms.istad.co';
 
   bool showFilterDialog = false;
+  final _productViewModel = ProductViewModel();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _productViewModel;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +218,7 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
 
   Future _showFilterDialog(BuildContext context) {
     return showModalBottomSheet(
-      enableDrag: true,
+      // enableDrag: true,
       isScrollControlled: true,
       context: context,
       builder: (context) => Padding(
@@ -270,13 +280,23 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
                 create: (context) => productViewModel,
                 child: Consumer<ProductViewModel>(
                   builder: (context, viewmodel, _) {
-                    if (viewmodel.response.status == Status.COMPLETED) {
-                      print('delete completed');
-                      Navigator.pop(context);
-                    }
+                    if (viewmodel.response.status == Status.COMPLETED) {}
                     return ElevatedButton(
                       onPressed: () {
-                        productViewModel.deleteProduct(widget.product!.id);
+                        switch (viewmodel.response.status!) {
+                          case Status.LOADING:
+                          case Status.COMPLETED:
+                            productViewModel.deleteProduct(widget.product!.id);
+
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Delete Success'),
+                              ));
+                            });
+                            Navigator.pop(context);
+                          case Status.ERROR:
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,

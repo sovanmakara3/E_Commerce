@@ -235,18 +235,18 @@ class ThumbnailData {
 
 class FluffyAttributes {
   String? name;
-  String? alternativeText;
-  String? caption;
+  dynamic alternativeText;
+  dynamic caption;
   int? width;
   int? height;
   Formats? formats;
   String? hash;
-  Ext? ext;
-  Mime? mime;
+  String? ext;
+  String? mime;
   double? size;
   String? url;
   dynamic previewUrl;
-  Provider? provider;
+  String? provider;
   dynamic providerMetadata;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -280,12 +280,12 @@ class FluffyAttributes {
         formats:
             json["formats"] == null ? null : Formats.fromJson(json["formats"]),
         hash: json["hash"],
-        ext: extValues.map[json["ext"]]!,
-        mime: mimeValues.map[json["mime"]]!,
+        ext: json["ext"],
+        mime: json["mime"],
         size: json["size"]?.toDouble(),
         url: json["url"],
         previewUrl: json["previewUrl"],
-        provider: providerValues.map[json["provider"]]!,
+        provider: json["provider"],
         providerMetadata: json["provider_metadata"],
         createdAt: json["createdAt"] == null
             ? null
@@ -303,58 +303,53 @@ class FluffyAttributes {
         "height": height,
         "formats": formats?.toJson(),
         "hash": hash,
-        "ext": extValues.reverse[ext],
-        "mime": mimeValues.reverse[mime],
+        "ext": ext,
+        "mime": mime,
         "size": size,
         "url": url,
         "previewUrl": previewUrl,
-        "provider": providerValues.reverse[provider],
+        "provider": provider,
         "provider_metadata": providerMetadata,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
       };
 }
 
-enum Ext { JPEG, JPG, PNG }
-
-final extValues =
-    EnumValues({".jpeg": Ext.JPEG, ".jpg": Ext.JPG, ".png": Ext.PNG});
-
 class Formats {
   Large? small;
-  Large? thumbnail;
   Large? medium;
+  Large? thumbnail;
   Large? large;
 
   Formats({
     this.small,
-    this.thumbnail,
     this.medium,
+    this.thumbnail,
     this.large,
   });
 
   factory Formats.fromJson(Map<String, dynamic> json) => Formats(
         small: json["small"] == null ? null : Large.fromJson(json["small"]),
+        medium: json["medium"] == null ? null : Large.fromJson(json["medium"]),
         thumbnail: json["thumbnail"] == null
             ? null
             : Large.fromJson(json["thumbnail"]),
-        medium: json["medium"] == null ? null : Large.fromJson(json["medium"]),
         large: json["large"] == null ? null : Large.fromJson(json["large"]),
       );
 
   Map<String, dynamic> toJson() => {
         "small": small?.toJson(),
-        "thumbnail": thumbnail?.toJson(),
         "medium": medium?.toJson(),
+        "thumbnail": thumbnail?.toJson(),
         "large": large?.toJson(),
       };
 }
 
 class Large {
-  Ext? ext;
+  String? ext;
   String? url;
   String? hash;
-  Mime? mime;
+  String? mime;
   String? name;
   dynamic path;
   double? size;
@@ -374,10 +369,10 @@ class Large {
   });
 
   factory Large.fromJson(Map<String, dynamic> json) => Large(
-        ext: extValues.map[json["ext"]]!,
+        ext: json["ext"],
         url: json["url"],
         hash: json["hash"],
-        mime: mimeValues.map[json["mime"]]!,
+        mime: json["mime"],
         name: json["name"],
         path: json["path"],
         size: json["size"]?.toDouble(),
@@ -386,10 +381,10 @@ class Large {
       );
 
   Map<String, dynamic> toJson() => {
-        "ext": extValues.reverse[ext],
+        "ext": ext,
         "url": url,
         "hash": hash,
-        "mime": mimeValues.reverse[mime],
+        "mime": mime,
         "name": name,
         "path": path,
         "size": size,
@@ -397,18 +392,6 @@ class Large {
         "height": height,
       };
 }
-
-enum Mime { APPLICATION_OCTET_STREAM, IMAGE_JPEG, IMAGE_PNG }
-
-final mimeValues = EnumValues({
-  "application/octet-stream": Mime.APPLICATION_OCTET_STREAM,
-  "image/jpeg": Mime.IMAGE_JPEG,
-  "image/png": Mime.IMAGE_PNG
-});
-
-enum Provider { LOCAL }
-
-final providerValues = EnumValues({"local": Provider.LOCAL});
 
 class Meta {
   Pagination? pagination;
@@ -454,16 +437,4 @@ class Pagination {
         "pageCount": pageCount,
         "total": total,
       };
-}
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

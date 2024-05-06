@@ -10,14 +10,14 @@ ProductRequest productRequestFromJson(String str) =>
 String productRequestToJson(ProductRequest data) => json.encode(data.toJson());
 
 class ProductRequest {
-  Data? data;
+  DataRequest? data;
 
   ProductRequest({
     this.data,
   });
 
   factory ProductRequest.fromJson(Map<String, dynamic> json) => ProductRequest(
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        data: json["data"] == null ? null : DataRequest.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -25,7 +25,7 @@ class ProductRequest {
       };
 }
 
-class Data {
+class DataRequest {
   String? title;
   String? rating;
   String? description;
@@ -34,7 +34,7 @@ class Data {
   String? thumbnail;
   String? price;
 
-  Data({
+  DataRequest({
     this.title,
     this.rating,
     this.description,
@@ -44,7 +44,7 @@ class Data {
     this.price,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory DataRequest.fromJson(Map<String, dynamic> json) => DataRequest(
         title: json["title"],
         rating: json["rating"],
         description: json["description"],

@@ -5,6 +5,7 @@ import 'package:e_commerce/views/add_products/models/request/product_request.dar
 import 'package:e_commerce/views/add_products/viewmodels/add_product_viewmodel.dart';
 import 'package:e_commerce/views/add_products/viewmodels/image_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -51,11 +52,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
+        leading: widget.isFromUpdate!
+            ? IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Iconsax.arrow_left_2))
+            : const Icon(Iconsax.box),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChangeNotifierProvider(
-              create: (context) => AddProductViewModel(),
+              create: (context) => _addProductViewModel,
               child: Consumer<AddProductViewModel>(
                 builder: (context, viewModel, _) {
                   if (viewModel.response.status == null) {
@@ -87,10 +95,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       return const Center(child: CircularProgressIndicator());
                     case Status.COMPLETED:
                       WidgetsBinding.instance.addPostFrameCallback((_) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text('Post Success'),
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: widget.isFromUpdate!
+                              ? const Text('Update Success')
+                              : const Text('Post Success'),
                         ));
+                        widget.isFromUpdate!
+                            ? Navigator.pop(context)
+                            : clearText();
                       });
                       return TextButton(
                         onPressed: () {
@@ -106,7 +118,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         ),
                       );
                     case Status.ERROR:
-                      return const Text('Error');
+                      return Text(viewModel.response.message!);
                   }
                 },
               ),
@@ -244,6 +256,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
     );
   }
 
+  void clearText() {
+    nameController.clear();
+    priceController.clear();
+    rateController.clear();
+    qtyController.clear();
+    descriptionController.clear();
+    categoryController.clear();
+  }
+
   _getImageFromSource() async {
     XFile? pickFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -254,7 +275,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   void _saveProduct() {
     var productRequest = ProductRequest(
-        data: Data(
+        data: DataRequest(
       title: nameController.text,
       price: priceController.text,
       rating: rateController.text,
@@ -264,8 +285,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
       thumbnail: imageID.toString(),
     ));
 
-    _addProductViewModel.postProduct(productRequest,
-        isFromUpdate: widget.isFromUpdate, id: productId);
+    _addProductViewModel.postProduct(
+      productRequest,
+      isFromUpdate: widget.isFromUpdate,
+      id: productId,
+    );
   }
 
   void checkIfFromUpdate() {
@@ -277,7 +301,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       descriptionController.text = widget.product!.attributes!.description!;
       categoryController.text =
           widget.product!.attributes!.category!.toString();
-      imageID = widget.product!.id;
+      imageID = widget.product!.attributes!.thumbnail!.data!.id;
       productId = widget.product!.id;
     }
   }
